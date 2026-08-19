@@ -1,0 +1,532 @@
+/* =========================================================
+   PROJECTS SCENE
+========================================================= */
+
+#projects {
+  position: relative;
+
+  background: #0b1318;
+
+  overflow: visible;
+}
+
+/* =========================================================
+   MAIN SCENE
+========================================================= */
+
+.projects-scene {
+  position: relative;
+
+  width: 100%;
+
+  background: #0b1318;
+}
+
+/* =========================================================
+   PROJECT HEADER
+   STAYS VISIBLE WHILE CARDS STACK
+========================================================= */
+
+.projects-stack-heading {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 20;
+
+  width: 100%;
+
+  min-height: 220px;
+
+  padding: 45px 0 30px;
+
+  box-sizing: border-box;
+
+  background: #0b1318;
+}
+
+/* small label */
+
+.projects-stack-heading span {
+  display: block;
+
+  margin-bottom: 18px;
+
+  color: #9ee8ef;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+/* heading */
+
+.projects-stack-heading h2 {
+  margin: 0;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: clamp(65px, 8vw, 125px);
+
+  line-height: 0.78;
+
+  font-weight: 400;
+
+  letter-spacing: -0.06em;
+
+  color: #f2eee5;
+}
+
+.projects-stack-heading h2 em {
+  color: #f5a34a;
+
+  font-style: italic;
+}
+
+/* =========================================================
+   SCROLL STACK
+========================================================= */
+
+.scroll-stack-scroller {
+  position: relative;
+
+  width: 100%;
+
+  height: auto;
+
+  overflow: visible;
+
+  overflow-x: visible;
+
+  overscroll-behavior: auto;
+}
+
+.scroll-stack-inner {
+  width: 100%;
+
+  padding: 8vh 0 55vh;
+
+  min-height: 100vh;
+}
+
+/* =========================================================
+   STACK CARDS
+========================================================= */
+
+.scroll-stack-card {
+  position: relative;
+
+  /* REDUCED WIDTH */
+  width: 88%;
+
+  /* KEEP CARD CENTERED */
+  margin: 0 auto;
+
+  min-height: 560px;
+
+  padding: 75px;
+
+  box-sizing: border-box;
+
+  border-radius: 32px;
+
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(158, 232, 239, 0.1),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.075),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.4);
+
+  overflow: hidden;
+
+  transform-origin: top center;
+
+  will-change: transform, filter;
+
+  backface-visibility: hidden;
+
+  transform-style: preserve-3d;
+}
+
+/* glow */
+
+.scroll-stack-card::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(158, 232, 239, 0.1),
+      transparent 35%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   PROJECT CONTENT
+========================================================= */
+
+.project-stack-card {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  min-height: 410px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+}
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.work-num {
+  position: absolute;
+
+  top: 0;
+
+  right: 0;
+
+  font-size: 12px;
+
+  letter-spacing: 0.18em;
+
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.work-card-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 40px;
+
+  padding-right: 45px;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.work-title {
+  margin: 0;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: clamp(70px, 8vw, 120px);
+
+  line-height: 0.86;
+
+  font-weight: 400;
+
+  letter-spacing: -0.055em;
+
+  color: #f2eee5;
+}
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.work-subtitle {
+  margin-top: 20px;
+
+  font-size: 17px;
+
+  line-height: 1.4;
+
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.work-desc {
+  max-width: 850px;
+
+  margin: 45px 0 35px;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.57);
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.work-links {
+  display: flex;
+
+  gap: 12px;
+
+  align-items: center;
+}
+
+.work-links a {
+  width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  border-radius: 50%;
+
+  color: #f2eee5;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.work-links a:hover {
+  transform: translateY(-3px);
+
+  background: #9ee8ef;
+
+  color: #0b1318;
+}
+
+/* =========================================================
+   TECH
+========================================================= */
+
+.work-tech {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 30px;
+}
+
+.work-tag {
+  padding: 8px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   LIVE DEMO
+========================================================= */
+
+.work-action {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  width: fit-content;
+
+  color: #f2eee5;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.work-action:hover {
+  color: #9ee8ef;
+
+  transform: translateX(5px);
+}
+
+/* =========================================================
+   END
+========================================================= */
+
+.scroll-stack-end {
+  width: 100%;
+
+  height: 1px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .projects-stack-heading {
+    min-height: 190px;
+
+    padding: 35px 0 25px;
+  }
+
+  .scroll-stack-inner {
+    padding: 6vh 0 40vh;
+  }
+
+  .scroll-stack-card {
+    /* SLIGHTLY WIDER ON TABLET */
+    width: 92%;
+
+    margin: 0 auto;
+
+    min-height: 500px;
+
+    padding: 50px;
+
+    border-radius: 28px;
+  }
+
+  .work-title {
+    font-size: clamp(55px, 12vw, 90px);
+  }
+
+  .work-desc {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .projects-stack-heading {
+    min-height: 165px;
+
+    padding: 30px 0 20px;
+  }
+
+  .projects-stack-heading h2 {
+    font-size: 60px;
+  }
+
+  .scroll-stack-inner {
+    padding: 5vh 0 30vh;
+  }
+
+  .scroll-stack-card {
+    /* KEEP SMALL SIDE SPACING ON MOBILE */
+    width: 94%;
+
+    margin: 0 auto;
+
+    min-height: 500px;
+
+    padding: 32px 24px;
+
+    border-radius: 22px;
+  }
+
+  .project-stack-card {
+    min-height: 430px;
+  }
+
+  .work-card-header {
+    flex-direction: column;
+
+    gap: 25px;
+
+    padding-right: 25px;
+  }
+
+  .work-title {
+    font-size: 52px;
+  }
+
+  .work-subtitle {
+    margin-top: 14px;
+
+    font-size: 15px;
+  }
+
+  .work-desc {
+    margin: 30px 0 25px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+  }
+
+  .work-tag {
+    padding: 7px 10px;
+
+    font-size: 9px;
+  }
+
+  .work-links a {
+    width: 38px;
+
+    height: 38px;
+  }
+}
+
+ /*   FORCE NARROW PROJECT CARDS */
+
+.scroll-stack-scroller .scroll-stack-inner .scroll-stack-card {
+  width: 75% !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
