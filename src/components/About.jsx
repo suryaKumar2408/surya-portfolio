@@ -126,7 +126,7 @@ export default function About() {
                   </span>
 
                   <span className="exp-org">
-                    Pankh AI
+                    TATA-Forage
                   </span>
 
                 </div>

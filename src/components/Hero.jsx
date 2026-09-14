@@ -299,8 +299,8 @@ export default function Hero({ onContactClick }) {
           </a>
 
           <a
-            href="/surya_kumar_full_stack_developer.pdf"
-            download="Surya_Kumar_Full_Stack_Developer.pdf"
+            href="/surya_kumar_developer.pdf"
+            download="Surya_Kumar_Developer.pdf"
             className="resume-link"
           >
             Resume
