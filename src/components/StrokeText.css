@@ -14,6 +14,13 @@
   height: var(--stroke-text-height, 160px);
 }
 
+@media (max-width: 768px) {
+  .stroke-text__svg {
+    height: auto;
+    max-height: var(--stroke-text-height, 160px);
+  }
+}
+
 .stroke-text__stroke,
 .stroke-text__fill {
   user-select: none;

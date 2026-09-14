@@ -706,26 +706,26 @@ export default function SkillsAchievements() {
         @media (max-width: 700px) {
 
           .skills-achievements-section {
-            height: 100vh;
-
-            min-height: 100vh;
+            height: auto;
+            min-height: auto;
 
             padding:
-              80px 25px;
+              70px 20px 40px;
 
-            border-bottom-left-radius: 28px;
-            border-bottom-right-radius: 28px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
           }
 
 
           .skills-achievements-container {
             grid-template-columns: 1fr;
 
-            gap: 50px;
+            gap: 40px;
 
-            overflow-y: auto;
+            overflow: visible;
+            height: auto;
 
-            padding-bottom: 30px;
+            padding-bottom: 20px;
           }
 
 

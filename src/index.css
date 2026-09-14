@@ -522,8 +522,8 @@ textarea {
 
   .hero-description {
     width: 85%;
-    margin-top: 3rem;
-    margin-bottom: 2.8rem;
+    margin-top: 2.2rem;
+    margin-bottom: 2.5rem;
     font-size: 0.9rem;
   }
 
@@ -543,23 +543,40 @@ textarea {
     bottom: -70px;
 
     opacity: 0.9;
+
+    /* MOBILE FIX: keeps the robot behind the hero
+       buttons instead of covering "Resume" — it was
+       painting on top because it comes after
+       .hero-copy in the markup and shared the same
+       z-index. */
+    z-index: 1;
   }
 
-  /* NAME */
+  /* NAME — switch to flow layout on mobile so SVG heights
+     don't cause Kumar to overlap Surya */
 
   .name-stack {
     width: 100%;
-    height: 190px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    transform: none;
   }
 
   .name-surya {
-    width: 330px;
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(85vw, 340px);
   }
 
   .name-kumar {
-    top: 80px;
-    left: 100px;
-    width: 300px;
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-left: min(20vw, 80px);
+    margin-top: -0.4rem;
+    width: min(80vw, 310px);
   }
 
   /* SKILLS */
@@ -616,8 +633,10 @@ textarea {
   }
 
   .hero-description {
-    width: 82%;
-    font-size: 0.82rem;
+    width: 85%;
+    margin-top: 1.8rem;
+    margin-bottom: 2.2rem;
+    font-size: 0.85rem;
   }
 
   .round-link,
@@ -635,17 +654,17 @@ textarea {
   }
 
   .name-stack {
-    height: 150px;
+    height: auto;
   }
 
   .name-surya {
-    width: 270px;
+    width: min(82vw, 280px);
   }
 
   .name-kumar {
-    top: 65px;
-    left: 80px;
-    width: 240px;
+    margin-left: min(18vw, 75px);
+    margin-top: -0.35rem;
+    width: min(76vw, 255px);
   }
 
   .skills-achievements {
@@ -678,20 +697,23 @@ textarea {
 
   .hero-description {
     width: 90%;
+    margin-top: 1.6rem;
+    margin-bottom: 2rem;
+    font-size: 0.82rem;
   }
 
   .name-stack {
-    height: 130px;
+    height: auto;
   }
 
   .name-surya {
-    width: 220px;
+    width: min(80vw, 230px);
   }
 
   .name-kumar {
-    top: 52px;
-    left: 60px;
-    width: 200px;
+    margin-left: min(15vw, 60px);
+    margin-top: -0.3rem;
+    width: min(74vw, 210px);
   }
 
   .skills-intro {
@@ -804,4 +826,46 @@ textarea {
       translateY(0);
     opacity: 1;
   }
+}
+
+/* =========================================================
+   NAME FLIP — MOBILE OVERRIDES
+   On mobile there's no hover, and the absolute-positioned
+   flip container would collapse to zero height with
+   height:auto. Strip the 3D machinery; render flat.
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .name-stack-hover-zone {
+    perspective: none;
+    cursor: default;
+  }
+
+  .name-flip-stage,
+  .name-flip-inner {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform-style: flat;
+    transform: none !important;
+    transition: none;
+  }
+
+  .name-face {
+    position: static;
+    width: 100%;
+    height: auto;
+    backface-visibility: visible;
+  }
+
+  /* Hide the back face (job title) on mobile since there's no hover */
+  .name-face-back {
+    display: none;
+  }
+
+  .name-face-front {
+    transform: none;
+  }
+
 }

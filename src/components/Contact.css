@@ -613,33 +613,31 @@
 @media (max-width: 768px) {
 
   .contact-section {
-    min-height: 100vh;
-
+    min-height: auto;
     height: auto;
 
     padding:
-      100px 6vw;
+      80px 6vw 85px;
   }
 
   .contact-container {
-    gap: 65px;
+    gap: 45px;
   }
 
   .contact-info h2 {
     font-size:
       clamp(
-        70px,
-        17vw,
-        105px
+        64px,
+        15vw,
+        95px
       );
 
-    letter-spacing: -5px;
+    letter-spacing: -4px;
   }
 
   .contact-description {
-    margin-top: 40px;
-
-    margin-bottom: 45px;
+    margin-top: 25px;
+    margin-bottom: 30px;
 
     font-size: 15px;
   }
@@ -647,9 +645,18 @@
   .contact-form-card {
     width: 100%;
 
-    padding: 32px;
+    padding: 28px 24px;
 
     border-radius: 20px;
+  }
+
+  .contact-input-group textarea {
+    min-height: 115px;
+  }
+
+  .contact-submit {
+    height: 50px;
+    margin-top: 10px;
   }
 
 }
@@ -663,17 +670,23 @@
 
   .contact-section {
     padding:
-      85px 25px;
+      70px 20px 85px;
+  }
+
+  .contact-container {
+    gap: 36px;
   }
 
   .contact-info h2 {
-    font-size: 68px;
+    font-size: 58px;
 
-    letter-spacing: -4px;
+    letter-spacing: -3px;
   }
 
   .contact-description {
     font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 25px;
   }
 
   .contact-name-row {
@@ -681,7 +694,11 @@
   }
 
   .contact-form-card {
-    padding: 27px;
+    padding: 24px 18px;
+  }
+
+  .contact-input-group textarea {
+    min-height: 105px;
   }
 
   .contact-social-links a {
@@ -703,15 +720,21 @@
 
   .contact-section {
     padding:
-      75px 20px;
+      60px 16px 85px;
   }
 
   .contact-info h2 {
-    font-size: 58px;
+    font-size: 48px;
+    letter-spacing: -2px;
   }
 
   .contact-form-card {
-    padding: 22px;
+    padding: 20px 14px;
+  }
+
+  .contact-submit {
+    height: 48px;
+    font-size: 12px;
   }
 
 }

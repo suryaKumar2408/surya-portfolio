@@ -18,14 +18,20 @@ export default function MotionPortfolio() {
   const handleContactClick = event => {
     const contactTrigger = contactTriggerRef.current
 
-    if (!contactTrigger) return
+    if (contactTrigger) {
+      event.preventDefault()
+      window.scrollTo({
+        top: contactTrigger.end,
+        behavior: 'smooth'
+      })
+      return
+    }
 
-    event.preventDefault()
-
-    window.scrollTo({
-      top: contactTrigger.end,
-      behavior: 'smooth'
-    })
+    const contactEl = document.getElementById('contact')
+    if (contactEl) {
+      event.preventDefault()
+      contactEl.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   useLayoutEffect(() => {
@@ -68,33 +74,10 @@ export default function MotionPortfolio() {
       })
 
       mm.add('(max-width: 768px)', () => {
-        const animation = gsap.fromTo(
-          skillsSection,
-          {
-            yPercent: 0,
-          },
-          {
-            yPercent: -100,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: revealSection,
-              start: 'top top',
-              end: '+=100%',
-              scrub: true,
-              pin: true,
-              pinSpacing: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-            },
-          }
-        )
+        contactTriggerRef.current = null
+        gsap.set(skillsSection, { yPercent: 0, clearProps: 'transform' })
 
-        contactTriggerRef.current = animation.scrollTrigger
-
-        return () => {
-          contactTriggerRef.current = null
-          animation.kill()
-        }
+        return () => {}
       })
 
       ScrollTrigger.refresh()
@@ -294,29 +277,55 @@ export default function MotionPortfolio() {
 
         @media (max-width: 768px) {
 
+          /* On mobile we drop the absolute/pinned layout entirely
+             and flow the two sections naturally.
+             DOM order is: contact-behind → skills-cover.
+             We use flex + order so Skills appears FIRST visually,
+             then Contact below it — matching scroll intent. */
+
           .skills-contact-reveal {
-            height: 100vh;
+            height: auto;
+            min-height: auto;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
           }
 
           .skills-cover {
-            height: 100vh;
-          }
-
-          .contact-behind {
-            height: 100vh;
-          }
-
-          .contact-behind .contact-section {
-            height: 100vh;
-            min-height: 100vh;
+            order: 1;
+            position: relative;
+            top: auto;
+            left: auto;
+            width: 100%;
+            height: auto;
+            z-index: 2;
+            transform: none !important;
           }
 
           .skills-cover .skills-achievements-section {
-            height: 100vh;
-            min-height: 100vh;
+            height: auto;
+            min-height: auto;
 
             border-bottom-left-radius: 28px;
             border-bottom-right-radius: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: visible;
+          }
+
+          .contact-behind {
+            order: 2;
+            position: relative;
+            inset: auto;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+            overflow: visible;
+          }
+
+          .contact-behind .contact-section {
+            height: auto;
+            min-height: auto;
+            overflow: visible;
           }
 
         }
