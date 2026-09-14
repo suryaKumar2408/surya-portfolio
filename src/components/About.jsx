@@ -122,11 +122,11 @@ export default function About() {
                 <div className="exp-left">
 
                   <span className="exp-period">
-                    Nov 2025 – Feb 2026
+                    June 2026 – <Aug></Aug> 2026
                   </span>
 
                   <span className="exp-org">
-                    TATA-Forage
+                    SAMVARG SOLUTIONS
                   </span>
 
                 </div>
