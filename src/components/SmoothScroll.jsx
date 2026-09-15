@@ -27,18 +27,23 @@ export default function SmoothScroll({ children }) {
     if (isReducedMotion) return
 
     const lenis = new Lenis({
-      duration: 1.35,
+      duration: 1.2,
       easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 1.2,
+      syncTouch: true,
+      syncTouchLerp: 0.08,
+      touchInertiaExponent: 1.65,
+      touchMultiplier: 1.15,
       lerp: 0.09,
       infinite: false,
       autoRaf: false,
     })
 
     lenisRef.current = lenis
+    window.__lenis = lenis
+    window.dispatchEvent(new CustomEvent('lenis-init', { detail: lenis }))
 
     // Keep ScrollTrigger's calculations glued to Lenis's
     // smoothed scroll position every frame.
@@ -67,6 +72,9 @@ export default function SmoothScroll({ children }) {
       gsap.ticker.remove(rafCallback)
       lenis.destroy()
       lenisRef.current = null
+      if (window.__lenis === lenis) {
+        window.__lenis = null
+      }
     }
   }, [])
 

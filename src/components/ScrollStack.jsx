@@ -48,6 +48,8 @@ const ScrollStack = ({
 
   const isUpdatingRef = useRef(false)
 
+  const lastWidthRef = useRef(typeof window !== 'undefined' ? window.innerWidth : 0)
+
   const calculateProgress = useCallback(
     (scrollTop, start, end) => {
       if (end <= start) {
@@ -129,6 +131,11 @@ const ScrollStack = ({
      */
     scroller.offsetHeight
 
+    const currentScroll =
+      typeof window !== 'undefined' && window.__lenis
+        ? window.__lenis.scroll
+        : (typeof window !== 'undefined' ? (window.scrollY || window.pageYOffset || 0) : 0)
+
     if (useWindowScroll) {
       cardPositionsRef.current =
         cards.map((card) => {
@@ -137,7 +144,7 @@ const ScrollStack = ({
 
           return (
             rect.top +
-            window.scrollY
+            currentScroll
           )
         })
 
@@ -152,7 +159,7 @@ const ScrollStack = ({
 
         endPositionRef.current =
           rect.top +
-          window.scrollY
+          currentScroll
       }
     } else {
       cardPositionsRef.current =
@@ -187,10 +194,19 @@ const ScrollStack = ({
 
   const getScrollData = useCallback(() => {
     if (useWindowScroll) {
+      const scrollTop =
+        typeof window !== 'undefined' && window.__lenis
+          ? window.__lenis.scroll
+          : (typeof window !== 'undefined' ? (window.scrollY || window.pageYOffset || 0) : 0)
+
+      // Use documentElement.clientHeight to prevent mobile URL bar bounce
+      const containerHeight =
+        (typeof document !== 'undefined' && document.documentElement.clientHeight) ||
+        (typeof window !== 'undefined' ? window.innerHeight : 800)
+
       return {
-        scrollTop: window.scrollY,
-        containerHeight:
-          window.innerHeight,
+        scrollTop,
+        containerHeight,
       }
     }
 
@@ -201,7 +217,8 @@ const ScrollStack = ({
       return {
         scrollTop: 0,
         containerHeight:
-          window.innerHeight,
+          (typeof document !== 'undefined' && document.documentElement.clientHeight) ||
+          (typeof window !== 'undefined' ? window.innerHeight : 800),
       }
     }
 
@@ -213,7 +230,7 @@ const ScrollStack = ({
   }, [useWindowScroll])
 
   const updateCardTransforms =
-    useCallback(() => {
+    useCallback((customScrollTop) => {
       if (
         !cardsRef.current.length ||
         isUpdatingRef.current
@@ -223,16 +240,33 @@ const ScrollStack = ({
 
       isUpdatingRef.current = true
 
-      const {
-        scrollTop,
-        containerHeight,
-      } = getScrollData()
+      const scrollData = getScrollData()
+      const scrollTop =
+        typeof customScrollTop === 'number'
+          ? customScrollTop
+          : scrollData.scrollTop
+      const containerHeight = scrollData.containerHeight
 
-      const stackPositionPx =
+      const isMobile =
+        typeof window !== 'undefined' && window.innerWidth <= 600
+
+      const effectiveItemStackDistance = isMobile
+        ? Math.min(itemStackDistance, 20)
+        : itemStackDistance
+
+      const effectiveItemDistance = isMobile
+        ? Math.min(itemDistance, 60)
+        : itemDistance
+
+      const rawStackPositionPx =
         parsePercentage(
           stackPosition,
           containerHeight
         )
+
+      const stackPositionPx = isMobile
+        ? Math.max(rawStackPositionPx, 135)
+        : rawStackPositionPx
 
       const scaleEndPositionPx =
         parsePercentage(
@@ -269,7 +303,7 @@ const ScrollStack = ({
           const pinStart =
             cardTop -
             stackPositionPx -
-            itemStackDistance *
+            effectiveItemStackDistance *
               index
 
           /*
@@ -279,7 +313,7 @@ const ScrollStack = ({
           const scaleStart =
             cardTop -
             stackPositionPx -
-            itemDistance
+            effectiveItemDistance
 
           const scaleEnd =
             cardTop -
@@ -321,7 +355,7 @@ const ScrollStack = ({
               scrollTop -
               cardTop +
               stackPositionPx +
-              itemStackDistance *
+              effectiveItemStackDistance *
                 index
           } else if (
             scrollTop > pinEnd
@@ -330,7 +364,7 @@ const ScrollStack = ({
               pinEnd -
               cardTop +
               stackPositionPx +
-              itemStackDistance *
+              effectiveItemStackDistance *
                 index
           }
 
@@ -354,7 +388,7 @@ const ScrollStack = ({
               const otherPinStart =
                 otherCardTop -
                 stackPositionPx -
-                itemStackDistance *
+                effectiveItemStackDistance *
                   j
 
               if (
@@ -426,7 +460,7 @@ const ScrollStack = ({
         const lastCardStart =
           cardPositions[lastIndex] -
           stackPositionPx -
-          itemStackDistance *
+          effectiveItemStackDistance *
             lastIndex
 
         const complete =
@@ -501,6 +535,13 @@ const ScrollStack = ({
       )
     )
 
+    const isMobile =
+      typeof window !== 'undefined' && window.innerWidth <= 600
+
+    const effectiveItemDistance = isMobile
+      ? Math.min(itemDistance, 60)
+      : itemDistance
+
     cards.forEach(
       (card, index) => {
         /*
@@ -511,7 +552,7 @@ const ScrollStack = ({
           cards.length - 1
         ) {
           card.style.marginBottom =
-            `${itemDistance}px`
+            `${effectiveItemDistance}px`
         }
 
         card.style.willChange =
@@ -525,12 +566,6 @@ const ScrollStack = ({
 
         card.style.transform =
           'none'
-
-        card.style.perspective =
-          '1000px'
-
-        card.style.webkitPerspective =
-          '1000px'
       }
     )
 
@@ -546,8 +581,6 @@ const ScrollStack = ({
 
     /*
      * WINDOW SCROLL MODE
-     *
-     * No Lenis here.
      */
     const handleWindowScroll =
       () => {
@@ -555,25 +588,41 @@ const ScrollStack = ({
       }
 
     const handleResize = () => {
-      /*
-       * Clear old transforms before
-       * recalculating document positions.
-       */
-      cards.forEach((card) => {
-        card.style.transform =
-          'none'
-
-        card.style.filter =
-          'none'
-      })
-
-      requestAnimationFrame(() => {
+      const currentWidth = window.innerWidth
+      // On mobile phones, scrolling causes the address bar to show/hide,
+      // which triggers window resize with height changes only.
+      // We only re-measure document positions if width changed (e.g. rotation or desktop window resize)
+      if (Math.abs(currentWidth - lastWidthRef.current) > 5) {
+        lastWidthRef.current = currentWidth
         measurePositions()
-        updateCardTransforms()
+      }
+      updateCardTransforms()
+    }
+
+    let lenisUnsubscribe = null
+
+    const bindLenis = (lenisInstance) => {
+      if (!lenisInstance || lenisUnsubscribe) return
+      lenisUnsubscribe = lenisInstance.on('scroll', (e) => {
+        updateCardTransforms(e.scroll)
       })
     }
 
+    let handleLenisInit = null
+
     if (useWindowScroll) {
+      if (typeof window !== 'undefined' && window.__lenis) {
+        bindLenis(window.__lenis)
+      }
+
+      handleLenisInit = (e) => {
+        if (e.detail) {
+          bindLenis(e.detail)
+        }
+      }
+
+      window.addEventListener('lenis-init', handleLenisInit)
+
       window.addEventListener(
         'scroll',
         handleWindowScroll,
@@ -625,7 +674,7 @@ const ScrollStack = ({
 
       lenis.on(
         'scroll',
-        updateCardTransforms
+        (e) => updateCardTransforms(e.scroll)
       )
 
       lenisRef.current = lenis
@@ -645,11 +694,18 @@ const ScrollStack = ({
 
     /*
      * ResizeObserver keeps positions
-     * correct if content changes.
+     * correct if container width changes.
      */
     const resizeObserver =
-      new ResizeObserver(() => {
-        handleResize()
+      new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const width = entry.contentRect.width
+          if (width && Math.abs(width - lastWidthRef.current) > 5) {
+            lastWidthRef.current = width
+            measurePositions()
+            updateCardTransforms()
+          }
+        }
       })
 
     resizeObserver.observe(
@@ -657,6 +713,15 @@ const ScrollStack = ({
     )
 
     return () => {
+      if (lenisUnsubscribe) {
+        lenisUnsubscribe()
+        lenisUnsubscribe = null
+      }
+
+      if (handleLenisInit) {
+        window.removeEventListener('lenis-init', handleLenisInit)
+      }
+
       window.removeEventListener(
         'scroll',
         handleWindowScroll

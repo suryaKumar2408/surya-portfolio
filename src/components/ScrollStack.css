@@ -160,6 +160,8 @@
   backface-visibility: hidden;
 
   -webkit-backface-visibility: hidden;
+
+  touch-action: pan-y;
 }
 
 /* glow */
@@ -463,7 +465,7 @@
   }
 
   .scroll-stack-inner {
-    padding: 5vh 0 30vh;
+    padding: 6vh 0 55vh;
   }
 
   .scroll-stack-card {

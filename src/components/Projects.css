@@ -184,6 +184,8 @@
 
   -webkit-backface-visibility: hidden;
 
+  touch-action: pan-y;
+
   background: #17252b;
 
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -579,10 +581,10 @@
   }
 
   .works-header {
-    min-height: 165px;
+    min-height: 130px;
 
-    padding-top: 30px;
-    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 15px;
   }
 
   .projects-stack-column {
@@ -590,7 +592,7 @@
   }
 
   .scroll-stack-inner {
-    padding: 5vh 0 30vh;
+    padding: 6vh 0 55vh;
   }
 
   .scroll-stack-card {
