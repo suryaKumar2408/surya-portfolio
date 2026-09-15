@@ -2,7 +2,7 @@ import { FiGithub, FiLinkedin, FiSend } from 'react-icons/fi'
 import LiquidEther from './LiquidEther'
 import './Contact.css'
 
-export default function Contact() {
+export default function Contact({ active = true })  {
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -34,29 +34,31 @@ export default function Contact() {
           LIQUID ETHER BACKGROUND
       ================================= */}
 
-      <div className="contact-liquid-bg">
-        <LiquidEther
-          colors={[
-            '#163b4a',
-            '#1d5965',
-            '#7de3ed',
-            '#d4772e'
-          ]}
-          mouseForce={14}
-          cursorSize={75}
-          isViscous={false}
-          viscous={30}
-          iterationsViscous={32}
-          iterationsPoisson={32}
-          resolution={0.35}
-          isBounce={false}
-          autoDemo={true}
-          autoSpeed={0.35}
-          autoIntensity={2.2}
-          takeoverDuration={0.25}
-          autoResumeDelay={3000}
-          autoRampDuration={0.6}
-        />
+            <div className="contact-liquid-bg">
+        {active && (
+          <LiquidEther
+            colors={[
+              '#163b4a',
+              '#1d5965',
+              '#7de3ed',
+              '#d4772e'
+            ]}
+            mouseForce={14}
+            cursorSize={75}
+            isViscous={false}
+            viscous={30}
+            iterationsViscous={32}
+            iterationsPoisson={32}
+            resolution={0.35}
+            isBounce={false}
+            autoDemo={true}
+            autoSpeed={0.35}
+            autoIntensity={2.2}
+            takeoverDuration={0.25}
+            autoResumeDelay={3000}
+            autoRampDuration={0.6}
+          />
+        )}
       </div>
 
       {/* =================================

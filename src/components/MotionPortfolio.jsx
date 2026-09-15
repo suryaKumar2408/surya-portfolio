@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -11,9 +11,11 @@ import Contact from './Contact'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function MotionPortfolio() {
-  const revealRef = useRef(null)
+    const revealRef = useRef(null)
   const skillsRef = useRef(null)
   const contactTriggerRef = useRef(null)
+  const contactActiveRef = useRef(false)
+  const [contactActive, setContactActive] = useState(false)
 
   const handleContactClick = event => {
     const contactTrigger = contactTriggerRef.current
@@ -58,9 +60,20 @@ export default function MotionPortfolio() {
               end: '+=100%',
               scrub: true,
               pin: true,
-              pinSpacing: true,
+                            pinSpacing: true,
               anticipatePin: 1,
               invalidateOnRefresh: true,
+              onUpdate: self => {
+                const progress = self.progress
+                const shouldBeActive = contactActiveRef.current
+                  ? progress > 0.02
+                  : progress > 0.12
+
+                if (shouldBeActive !== contactActiveRef.current) {
+                  contactActiveRef.current = shouldBeActive
+                  setContactActive(shouldBeActive)
+                }
+              },
             },
           }
         )
@@ -73,8 +86,10 @@ export default function MotionPortfolio() {
         }
       })
 
-      mm.add('(max-width: 768px)', () => {
+            mm.add('(max-width: 768px)', () => {
         contactTriggerRef.current = null
+        contactActiveRef.current = true
+        setContactActive(true)
         gsap.set(skillsSection, { yPercent: 0, clearProps: 'transform' })
 
         return () => {}
@@ -116,12 +131,11 @@ export default function MotionPortfolio() {
             CONTACT — BEHIND SKILLS
         ================================= */}
 
-        <div className="contact-behind">
+                <div className="contact-behind">
 
-          <Contact />
+          <Contact active={contactActive} />
 
         </div>
-
 
         {/* =================================
             SKILLS — TOP / PINNED LAYER
