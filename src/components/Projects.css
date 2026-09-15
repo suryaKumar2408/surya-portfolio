@@ -182,7 +182,7 @@
 
   backface-visibility: hidden;
 
-  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
 
   background: #17252b;
 
@@ -596,27 +596,33 @@
   .scroll-stack-card {
     width: 94%;
 
-    min-height: 500px;
+    min-height: auto;
 
     padding: 32px 24px;
 
     border-radius: 22px;
+
+    overflow: visible;
   }
 
   .project-stack-card {
-    min-height: 430px;
+    min-height: auto;
   }
 
   .work-card-header {
     flex-direction: column;
 
-    gap: 25px;
+    gap: 18px;
 
-    padding-right: 25px;
+    padding-right: 0;
   }
 
   .work-title {
-    font-size: 52px;
+    font-size: clamp(38px, 10vw, 52px);
+
+    word-break: break-word;
+
+    overflow-wrap: break-word;
   }
 
   .work-subtitle {
@@ -626,15 +632,21 @@
   }
 
   .work-desc {
-    margin: 30px 0 25px;
+    margin: 24px 0 20px;
 
     font-size: 13px;
 
     line-height: 1.6;
   }
 
+  .work-tech {
+    gap: 6px;
+
+    margin-bottom: 18px;
+  }
+
   .work-tag {
-    padding: 7px 10px;
+    padding: 6px 10px;
 
     font-size: 9px;
   }
@@ -658,12 +670,14 @@
   }
 
   .scroll-stack-card {
-    width: 95%;
+    width: 96%;
 
-    padding: 28px 20px;
+    min-height: auto;
+
+    padding: 24px 18px;
   }
 
   .work-title {
-    font-size: 46px;
+    font-size: clamp(34px, 9vw, 46px);
   }
 }

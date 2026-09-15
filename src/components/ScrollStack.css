@@ -159,7 +159,7 @@
 
   backface-visibility: hidden;
 
-  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
 }
 
 /* glow */
@@ -472,15 +472,17 @@
 
     margin: 0 auto;
 
-    min-height: 500px;
+    min-height: auto;
 
     padding: 32px 24px;
 
     border-radius: 22px;
+
+    overflow: visible;
   }
 
   .project-stack-card {
-    min-height: 430px;
+    min-height: auto;
   }
 
   .work-card-header {
@@ -529,4 +531,25 @@
   max-width: 1200px !important;
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+/* TABLET — override the force-narrow rule */
+@media (max-width: 900px) {
+  .scroll-stack-scroller .scroll-stack-inner .scroll-stack-card {
+    width: 92% !important;
+  }
+}
+
+/* MOBILE — override the force-narrow rule */
+@media (max-width: 600px) {
+  .scroll-stack-scroller .scroll-stack-inner .scroll-stack-card {
+    width: 94% !important;
+  }
+}
+
+/* VERY SMALL MOBILE */
+@media (max-width: 420px) {
+  .scroll-stack-scroller .scroll-stack-inner .scroll-stack-card {
+    width: 96% !important;
+  }
 }
