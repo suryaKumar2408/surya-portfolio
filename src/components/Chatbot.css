@@ -637,12 +637,18 @@
   }
 
   .chatbot-window {
+    /* Pin to viewport edges — prevents top overflow */
+    top: 12px;
     bottom: 80px;
     right: 10px;
+    left: 10px;
 
-    width: calc(100vw - 20px);
-    height: calc(100vh - 100px);
-    max-height: calc(100vh - 100px);
+    width: auto;
+    max-width: none;
+
+    /* Let top + bottom control the height */
+    height: auto;
+    max-height: none;
 
     border-radius: 16px;
   }
@@ -651,9 +657,12 @@
 @media (max-width: 768px) and (min-width: 481px) {
   .chatbot-window {
     width: 370px;
-    height: 500px;
 
     bottom: 95px;
     right: 20px;
+
+    /* Constrain height to never overflow top */
+    height: auto;
+    max-height: calc(100vh - 120px);
   }
 }

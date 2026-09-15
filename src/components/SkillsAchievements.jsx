@@ -747,6 +747,70 @@ export default function SkillsAchievements() {
 
         }
 
+
+        /* =================================
+           MOBILE TAP INTERACTIONS
+        ================================= */
+
+        @media (max-width: 768px) {
+
+          /* Skill pills — cyan highlight + spring on tap */
+
+          .skill-pill:active {
+            border-color: #7de3ed;
+            color: #f8f1e7;
+            background: rgba(125, 227, 237, 0.12);
+            transform: scale(0.93);
+            transition: all 0.08s ease-in;
+          }
+
+          /* Achievement cards — border glow + lift on tap */
+
+          .achievement-card:active {
+            border-color: rgba(125, 227, 237, 0.45);
+            background: #131516;
+            transform: scale(0.97);
+            box-shadow:
+              0 0 20px rgba(125, 227, 237, 0.1);
+            transition: all 0.08s ease-in;
+          }
+
+          .achievement-card:active .achievement-symbol {
+            color: #7de3ed;
+            transform: scale(1.15);
+            transition: all 0.1s ease;
+          }
+
+          .achievement-symbol {
+            transition:
+              color 0.4s ease,
+              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+          }
+
+          /* Digital Archive title — enhanced glow on tap */
+
+          .skills-big-title:active .digital-word {
+            transform: translateX(5px);
+            -webkit-text-stroke:
+              1.8px rgba(125, 227, 237, 1);
+            text-shadow:
+              0 0 10px rgba(125, 227, 237, 0.5),
+              0 0 25px rgba(125, 227, 237, 0.2);
+            transition: all 0.1s ease;
+          }
+
+          .skills-big-title:active .archive-word-main {
+            transform: translateX(10px);
+            -webkit-text-stroke:
+              1.8px rgba(245, 163, 74, 1);
+            text-shadow:
+              0 0 10px rgba(245, 163, 74, 0.5),
+              0 0 25px rgba(245, 163, 74, 0.2);
+            transition: all 0.1s ease;
+          }
+
+        }
+
       `}</style>
 
     </section>

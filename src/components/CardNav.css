@@ -439,3 +439,68 @@ MOBILE
     font-size: 14px;
   }
 }
+
+
+/* =================================
+   MOBILE TAP INTERACTIONS
+================================= */
+
+@media (max-width: 768px) {
+
+  /* Hamburger — spring scale on tap */
+
+  .hamburger-menu:active {
+    transform: scale(0.85);
+    transition: transform 0.08s ease-in;
+  }
+
+  .hamburger-menu {
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* CTA button — deeper press + glow on tap */
+
+  .card-nav-cta-button:active {
+    transform: scale(0.9);
+    box-shadow:
+      0 2px 10px rgba(125, 227, 237, 0.35);
+    transition: all 0.08s ease-in;
+  }
+
+  .card-nav-cta-button {
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  /* Nav card links — slide on tap */
+
+  .nav-card-link:active {
+    opacity: 0.7;
+    transform: translateX(5px);
+    transition: all 0.08s ease;
+  }
+
+  .nav-card-link {
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Nav cards — subtle lift on tap */
+
+  .nav-card:active {
+    filter: brightness(1.15);
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+  }
+
+  .nav-card {
+    transition:
+      filter 0.35s ease,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+}

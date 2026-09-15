@@ -353,3 +353,92 @@
   }
 
 }
+
+
+/* =========================
+   MOBILE TAP INTERACTIONS
+   ========================= */
+
+@media (max-width: 768px) {
+
+  /* Stat boxes — scale + glow on tap */
+
+  .stat-box {
+    padding: 12px;
+    border-radius: 12px;
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.35s ease;
+  }
+
+  .stat-box:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.08s ease-in;
+  }
+
+  .stat-box:active .stat-num {
+    text-shadow: 0 0 14px rgba(245, 163, 74, 0.5);
+    transition: text-shadow 0.08s ease-in;
+  }
+
+  .stat-num {
+    transition: text-shadow 0.4s ease;
+  }
+
+  /* Experience items — border glow + slide on tap */
+
+  .experience-item {
+    transition:
+      border-color 0.4s ease,
+      transform 0.4s ease,
+      background 0.4s ease;
+    border-radius: 12px;
+    padding: 35px 12px;
+  }
+
+  .experience-item:active {
+    border-color: rgba(158, 232, 239, 0.35);
+    background: rgba(255, 255, 255, 0.03);
+    transform: translateX(4px);
+    transition: all 0.1s ease-in;
+  }
+
+  .experience-item:active .exp-org {
+    color: #9ee8ef;
+    transition: color 0.1s ease;
+  }
+
+  .exp-org {
+    transition: color 0.4s ease;
+  }
+
+  /* Decay card — brightness boost on tap */
+
+  .about-decay-card:active {
+    filter: brightness(1.1);
+    transform: scale(0.98);
+    transition: all 0.1s ease-in;
+  }
+
+  .about-decay-card {
+    transition:
+      filter 0.4s ease,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Section label pulse on tap */
+
+  .section-label-minimal:active {
+    color: #f5a34a;
+    text-shadow: 0 0 10px rgba(245, 163, 74, 0.4);
+    transition: all 0.08s ease;
+  }
+
+  .section-label-minimal {
+    transition:
+      color 0.4s ease,
+      text-shadow 0.4s ease;
+  }
+
+}

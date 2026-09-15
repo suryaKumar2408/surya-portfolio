@@ -681,3 +681,96 @@
     font-size: clamp(34px, 9vw, 46px);
   }
 }
+
+/* =========================================================
+   MOBILE TAP MICRO-INTERACTIONS
+========================================================= */
+
+@media (max-width: 768px) {
+
+  /* Center the "Selected Works" heading on mobile */
+
+  .works-header {
+    text-align: center;
+  }
+
+  .projects-heading-column {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Card — subtle lift + border glow on tap */
+
+  .scroll-stack-card {
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .scroll-stack-card:active {
+    border-color: rgba(137, 219, 223, 0.5);
+    box-shadow:
+      0 35px 90px rgba(0, 0, 0, 0.45),
+      0 0 30px rgba(137, 219, 223, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition:
+      border-color 0.08s ease-in,
+      box-shadow 0.08s ease-in;
+  }
+
+  /* Link icons — spring bounce on tap */
+
+  .work-links a {
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .work-links a:active {
+    transform: scale(0.85);
+    background: rgba(137, 219, 223, 0.2);
+    transition: transform 0.08s ease-in;
+  }
+
+  /* Live Demo link — slide + glow on tap */
+
+  .work-action {
+    transition:
+      color 0.35s ease,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      text-shadow 0.35s ease;
+  }
+
+  .work-action:active {
+    color: #9ee8ef;
+    transform: translateX(6px) scale(0.96);
+    text-shadow: 0 0 12px rgba(158, 232, 239, 0.5);
+    transition: all 0.08s ease-in;
+  }
+
+  /* Tech tags — subtle highlight on card tap */
+
+  .scroll-stack-card:active .work-tag {
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    transition: all 0.15s ease;
+  }
+
+  .work-tag {
+    transition:
+      background 0.4s ease,
+      border-color 0.4s ease;
+  }
+
+  /* Title — subtle brightness on card tap */
+
+  .scroll-stack-card:active .work-title {
+    text-shadow: 0 0 20px rgba(242, 238, 229, 0.3);
+    transition: text-shadow 0.1s ease;
+  }
+
+  .work-title {
+    transition: text-shadow 0.4s ease;
+  }
+}

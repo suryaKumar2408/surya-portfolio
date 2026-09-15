@@ -738,3 +738,83 @@
   }
 
 }
+
+
+/* =========================================================
+   MOBILE TAP MICRO-INTERACTIONS
+========================================================= */
+
+@media (max-width: 768px) {
+
+  /* Submit button — deeper press on tap */
+
+  .contact-submit:active {
+    transform: scale(0.95);
+    background: #d4772e;
+    box-shadow:
+      0 4px 15px rgba(232, 137, 50, 0.25),
+      inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: all 0.08s ease-in;
+  }
+
+  .contact-submit {
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .contact-submit:active svg {
+    transform: translate(3px, -2px) scale(1.1);
+    transition: transform 0.1s ease;
+  }
+
+  /* Social links — spring bounce on tap */
+
+  .contact-social-links a:active {
+    transform: scale(0.85);
+    background: #10191f;
+    border-color: #10191f;
+    color: #f4efe6;
+    transition: all 0.08s ease-in;
+  }
+
+  .contact-social-links a {
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  /* Contact links — slide on tap */
+
+  .contact-detail a:active {
+    color: #168f98;
+    transform: translateX(6px);
+    transition: all 0.08s ease;
+  }
+
+  .contact-detail a {
+    transition:
+      color 0.35s ease,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Form card — subtle border glow on tap */
+
+  .contact-form-card:active {
+    border-color: rgba(22, 143, 152, 0.45);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.12),
+      0 0 20px rgba(22, 143, 152, 0.08);
+    transition: all 0.12s ease;
+  }
+
+  .contact-form-card {
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+}
